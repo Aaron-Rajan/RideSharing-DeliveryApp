@@ -1,0 +1,24 @@
+# Build output
+/target/
+*/build/
+
+#Application.proprties file
+/src/main/resources/application.properties
+
+# Logs
+*.log
+/logs/
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# IntelliJ
+.idea/
+/*.iml
+
+# VS Code
+.vscode/
+
+# Maven wrapper files you don't care about (optional)
+/.mvn/wrapper/maven-wrapper.jar
