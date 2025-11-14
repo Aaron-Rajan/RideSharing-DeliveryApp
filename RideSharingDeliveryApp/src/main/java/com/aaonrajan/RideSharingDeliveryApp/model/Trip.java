@@ -18,6 +18,7 @@ public class Trip {
     private String pickupAddress;
     private String dropoffAddress;
     private long duration;
+    private long distance;
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 32)
     private TripStatus status;
@@ -34,12 +35,12 @@ public class Trip {
         super();
     }
 
-    public Trip(long tripId, String pickupAddress, String dropoffAddress, long duration, TripStatus status, Vehicle vehicle, Rating rating) {
-        super();
+    public Trip(long tripId, String pickupAddress, String dropoffAddress, long duration, long distance, TripStatus status, Vehicle vehicle, Rating rating) {
         this.tripId = tripId;
         this.pickupAddress = pickupAddress;
         this.dropoffAddress = dropoffAddress;
         this.duration = duration;
+        this.distance = distance;
         this.status = status;
         this.vehicle = vehicle;
         this.rating = rating;
@@ -99,6 +100,14 @@ public class Trip {
 
     public void setRating(Rating rating) {
         this.rating = rating;
+    }
+
+    public long getDistance() {
+        return distance;
+    }
+
+    public void setDistance(long distance) {
+        this.distance = distance;
     }
 
     @Override

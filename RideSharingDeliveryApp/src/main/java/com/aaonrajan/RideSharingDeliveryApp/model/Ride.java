@@ -23,8 +23,8 @@ public class Ride extends Trip {
         super();
     }
 
-    public Ride(long tripId, String pickupAddress, String dropoffAddress, long duration, TripStatus status, Vehicle vehicle, Rating rating, long fare, Rider rider) {
-        super(tripId, pickupAddress, dropoffAddress, duration, status, vehicle, rating);
+    public Ride(long tripId, String pickupAddress, String dropoffAddress, long duration, long distance, TripStatus status, Vehicle vehicle, Rating rating, long fare, Rider rider) {
+        super(tripId, pickupAddress, dropoffAddress, duration, distance, status, vehicle, rating);
         this.fare = fare;
         this.rider = rider;
     }

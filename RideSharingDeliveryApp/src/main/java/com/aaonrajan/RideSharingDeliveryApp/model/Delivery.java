@@ -13,8 +13,8 @@ public class Delivery extends Trip {
         super();
     }
 
-    public Delivery(long tripId, String pickupAddress, String dropoffAddress, long duration, TripStatus status, Vehicle vehicle, Rating rating, boolean isFragile, boolean isRemote) {
-        super(tripId, pickupAddress, dropoffAddress, duration, status, vehicle, rating);
+    public Delivery(long tripId, String pickupAddress, String dropoffAddress, long duration, long distance, TripStatus status, Vehicle vehicle, Rating rating, boolean isFragile, boolean isRemote) {
+        super(tripId, pickupAddress, dropoffAddress, duration, distance, status, vehicle, rating);
         this.isFragile = isFragile;
         this.isRemote = isRemote;
     }

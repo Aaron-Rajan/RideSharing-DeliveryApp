@@ -4,6 +4,7 @@ import com.aaonrajan.RideSharingDeliveryApp.model.User;
 import com.aaonrajan.RideSharingDeliveryApp.model.UserDto;
 import com.aaonrajan.RideSharingDeliveryApp.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
+import jakarta.validation.Valid;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +23,7 @@ public class UserController {
 
     @Operation(summary = "Creating new user")
     @PostMapping
-    public ResponseEntity<User> createUser(@RequestBody UserDto userDto) {
+    public ResponseEntity<User> createUser(@Valid @RequestBody UserDto userDto) {
         return ResponseEntity.ok(userService.createUser(userDto));
     }
 
@@ -40,7 +41,7 @@ public class UserController {
 
     @Operation(summary = "Updating user by ID")
     @PutMapping("/{id}")
-    public ResponseEntity<User> updateUser(@PathVariable long id, @RequestBody UserDto userDto) {
+    public ResponseEntity<User> updateUser(@PathVariable long id, @Valid @RequestBody UserDto userDto) {
         return ResponseEntity.ok(userService.updateUser(userDto, id));
     }
 

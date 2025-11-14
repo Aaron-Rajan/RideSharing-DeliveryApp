@@ -4,6 +4,7 @@ import com.aaonrajan.RideSharingDeliveryApp.model.Vehicle;
 import com.aaonrajan.RideSharingDeliveryApp.model.VehicleDto;
 import com.aaonrajan.RideSharingDeliveryApp.service.VehicleService;
 import io.swagger.v3.oas.annotations.Operation;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,7 +22,7 @@ public class VehicleController {
 
     @Operation(summary = "Creating new vehicle")
     @PostMapping
-    public ResponseEntity<Vehicle> createVehicle(@RequestBody VehicleDto vehicleDto) {
+    public ResponseEntity<Vehicle> createVehicle(@Valid @RequestBody VehicleDto vehicleDto) {
         return ResponseEntity.ok(vehicleService.createVehicle(vehicleDto));
     }
 
@@ -39,7 +40,7 @@ public class VehicleController {
 
     @Operation(summary = "Updating vehicle by ID")
     @PutMapping("/{id}")
-    public ResponseEntity<Vehicle> updateVehicle(@PathVariable long id, @RequestBody VehicleDto vehicleDto) {
+    public ResponseEntity<Vehicle> updateVehicle(@PathVariable long id, @Valid @RequestBody VehicleDto vehicleDto) {
         return ResponseEntity.ok(vehicleService.updateVehicle(vehicleDto, id));
     }
 

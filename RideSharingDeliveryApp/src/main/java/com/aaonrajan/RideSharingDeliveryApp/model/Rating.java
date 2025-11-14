@@ -13,8 +13,8 @@ public class Rating {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "RATING_SEQ_GEN")
     @SequenceGenerator(name = "RATING_SEQ_GEN", sequenceName = "RATING_SEQ")
     private long ratingId;
-    private long driverScore;
-    private long riderScore;
+    private Long driverScore;
+    private Long riderScore;
     private String comment;
     @OneToOne(mappedBy = "rating")
     @JsonIdentityReference(alwaysAsId = true)
@@ -32,7 +32,7 @@ public class Rating {
         super();
     }
 
-    public Rating(long ratingId, long driverScore, long riderScore, String comment, Trip trip, Driver driver, Rider rider) {
+    public Rating(long ratingId, Long driverScore, Long riderScore, String comment, Trip trip, Driver driver, Rider rider) {
         super();
         this.ratingId = ratingId;
         this.driverScore = driverScore;
@@ -51,19 +51,19 @@ public class Rating {
         this.ratingId = ratingId;
     }
 
-    public long getDriverScore() {
+    public Long getDriverScore() {
         return driverScore;
     }
 
-    public void setDriverScore(long driverScore) {
+    public void setDriverScore(Long driverScore) {
         this.driverScore = driverScore;
     }
 
-    public long getRiderScore() {
+    public Long getRiderScore() {
         return riderScore;
     }
 
-    public void setRiderScore(long riderScore) {
+    public void setRiderScore(Long riderScore) {
         this.riderScore = riderScore;
     }
 

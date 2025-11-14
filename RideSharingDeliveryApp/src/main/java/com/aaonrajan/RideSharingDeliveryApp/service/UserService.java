@@ -7,31 +7,45 @@ import com.aaonrajan.RideSharingDeliveryApp.repository.UserRepository;
 import com.aaonrajan.RideSharingDeliveryApp.repository.VehicleRespoitory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UserService {
+public class UserService implements UserDetailsService {
     private final UserRepository userRepo;
     private final VehicleRespoitory vehicleRepo;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserService(UserRepository userRepo, VehicleRespoitory vehicleRepo) {
+    public UserService(UserRepository userRepo, VehicleRespoitory vehicleRepo, PasswordEncoder passwordEncoder) {
         super();
         this.userRepo = userRepo;
         this.vehicleRepo = vehicleRepo;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public User createUser(UserDto userDto) {
         User user = null;
         if (userDto.getUserType().equals("driver")) {
             user = new Driver();
+            user.setRole(Role.DRIVER);
         } else if (userDto.getUserType().equals("rider")) {
             user = new Rider();
+            user.setRole(Role.RIDER);
+        } else if (userDto.getUserType().equals("dispatcher")) {
+            user = new Dispatcher();
+            user.setRole(Role.DISPATCHER);
+        } else {
+            throw new IllegalArgumentException("Not a valid user! Should be 'driver', 'rider', or 'dispatcher'.");
         }
         BeanUtils.copyProperties(userDto, user, "isActive");
         user.setActive(true);
+        user.setPassword(passwordEncoder.encode(userDto.getPassword()));
         return userRepo.save(user);
     }
 
@@ -75,5 +89,12 @@ public class UserService {
         driverReceieved.getVehicles().add(vehicleReceieved);
         vehicleReceieved.setDriver(driverReceieved);
         userRepo.save(driverReceieved);
+    }
+
+
+    @Override
+    public UserDetails loadUserByUsername(String identifier) throws UsernameNotFoundException {
+        return userRepo.findByEmail(identifier).
+                orElseThrow(() -> new UsernameNotFoundException("User not found: " + identifier));
     }
 }

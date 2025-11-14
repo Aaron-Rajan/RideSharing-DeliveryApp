@@ -20,8 +20,8 @@ public class Rider extends User {
         super();
     }
 
-    public Rider(long userId, String firstName, String lastName, String email, String phoneNo, boolean isActive, boolean isOnTrip, List<Ride> rides, List<Rating> ratings) {
-        super(userId, firstName, lastName, email, phoneNo, isActive);
+    public Rider(long userId, String firstName, String lastName, String email, String phoneNo, boolean isActive, String password, Role role, boolean isOnTrip, List<Ride> rides, List<Rating> ratings) {
+        super(userId, firstName, lastName, email, phoneNo, isActive, password, role);
         this.isOnTrip = isOnTrip;
         this.rides = rides;
         this.ratings = ratings;

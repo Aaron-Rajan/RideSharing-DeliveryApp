@@ -5,6 +5,7 @@ import com.aaonrajan.RideSharingDeliveryApp.model.Trip;
 import com.aaonrajan.RideSharingDeliveryApp.model.TripDto;
 import com.aaonrajan.RideSharingDeliveryApp.service.TripService;
 import io.swagger.v3.oas.annotations.Operation;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -39,8 +40,26 @@ public class TripController {
 
     @Operation(summary = "Requesting a trip, assigning rider to trip")
     @PostMapping("/reqTrip")
-    public ResponseEntity<Trip> requestTrip(@RequestParam long riderId, @RequestBody TripDto tripDto) {
+    public ResponseEntity<Trip> requestTrip(@RequestParam long riderId, @Valid @RequestBody TripDto tripDto) {
         return ResponseEntity.ok(tripService.requestTrip(riderId, tripDto));
+    }
+
+    @Operation(summary = "Requesting a trip using rest template client service, assigning rider to trip")
+    @PostMapping("/restClientReqTrip")
+    public ResponseEntity<Trip> restClientRequestTrip(@RequestParam long riderId, @Valid @RequestBody TripDto tripDto) {
+        return ResponseEntity.ok(tripService.restClientRequestTrip(riderId, tripDto));
+    }
+
+    @Operation(summary = "Requesting a trip using open feign client service, assigning rider to trip")
+    @PostMapping("/feignClientReqTrip")
+    public ResponseEntity<Trip> feignClientRequestTrip(@RequestParam long riderId, @Valid @RequestBody TripDto tripDto) {
+        return ResponseEntity.ok(tripService.feignClientRequestTrip(riderId, tripDto));
+    }
+
+    @Operation(summary = "Requesting a delivery using open feign client service")
+    @PostMapping("/reqDelivery")
+    public ResponseEntity<Trip> reqDelivery(@Valid @RequestBody TripDto tripDto) {
+        return ResponseEntity.ok(tripService.fiegnClientReqDelivery(tripDto));
     }
 
     @Operation(summary = "Rider cancelling a trip")
@@ -60,6 +79,13 @@ public class TripController {
     public ResponseEntity<Rating> rateDriver(@RequestParam long riderId, @RequestParam long rideId,
                                              @RequestBody Rating rating) {
         return ResponseEntity.ok(tripService.rateDriver(riderId, rideId, rating));
+    }
+
+    @Operation(summary = "Rating rider")
+    @PostMapping("/rateRider")
+    public ResponseEntity<Rating> rateRider(@RequestParam long driverId, @RequestParam long rideId,
+                                            @RequestBody Rating rating) {
+        return ResponseEntity.ok(tripService.rateRider(driverId, rideId, rating));
     }
 
     @Operation(summary = "Getting all ratings")

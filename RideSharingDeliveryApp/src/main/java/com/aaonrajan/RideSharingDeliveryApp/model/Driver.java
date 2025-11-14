@@ -25,8 +25,8 @@ public class Driver extends User {
         super();
     }
 
-    public Driver(long userId, String firstName, String lastName, String email, String phoneNo, boolean isActive, double balance, boolean isOnTrip, List<Vehicle> vehicles, List<Rating> ratings) {
-        super(userId, firstName, lastName, email, phoneNo, isActive);
+    public Driver(long userId, String firstName, String lastName, String email, String phoneNo, boolean isActive, String password, Role role, double balance, boolean isOnTrip, List<Vehicle> vehicles, List<Rating> ratings) {
+        super(userId, firstName, lastName, email, phoneNo, isActive, password, role);
         this.balance = balance;
         this.isOnTrip = isOnTrip;
         this.vehicles = vehicles;

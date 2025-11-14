@@ -1,15 +1,44 @@
 package com.aaonrajan.RideSharingDeliveryApp.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.persistence.Column;
+import jakarta.validation.constraints.*;
+
 public class VehicleDto {
+    @Column
+    @NotNull(message = "Make is required")
     private String make;
+    @Column
+    @NotNull(message = "Model is required")
     private String model;
+    @Column
+    @NotNull(message = "Colour is required")
     private String colour;
+    @NotBlank(message = "Plate number is required")
+    @Size(min = 2, max = 15, message = "Plate number must be between 2 and 15 characters")
+    @Pattern(
+            regexp = "^[A-Z0-9-]+$",
+            message = "Plate number may only contain capital letters, digits, and hyphens"
+    )
     private String plateNo;
+    @Column
+    @NotNull(message = "Number of seats is required")
+    @PositiveOrZero(message = "Number of seats must be zero or positive")
     private long seats;
+    @JsonProperty("hasChildSeat")
     private boolean hasChildSeat;
+    @JsonProperty("hasSnowTires")
     private boolean hasSnowTires;
+    @JsonProperty("isElectric")
     private boolean isElectric;
+    @Column
+    @NotNull(message = "Cargo capacity is required")
+    @PositiveOrZero(message = "Cargo capacity must be zero or positive")
     private long cargoCapacity;
+    @Column
+    @NotNull(message = "Vehicle type is required")
+    @Pattern(regexp = "car|bike|truck", flags = Pattern.Flag.CASE_INSENSITIVE,
+            message = "Vehicle type must be 'car', 'bike', or 'truck'")
     private String vehicleType;
 
     public VehicleDto() {
