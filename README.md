@@ -33,7 +33,7 @@ RideSharingDeliveryApp/
 Core domain logic:
 
 - Users: **Rider, Driver, Dispatcher**
-- **Vehicles**
+- Vehicles: **Car, Bike, Truck**
 - Trips: **Ride** vs **Delivery**
 - Ratings (e.g. riders rating drivers)
 
